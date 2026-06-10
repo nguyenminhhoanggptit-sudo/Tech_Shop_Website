@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thanh toán đơn hàng tại Gấu Trắng Tech">
+    <title>Thanh toán - Gấu Trắng Tech</title>
+
+    <link rel="stylesheet" href="css/checkout.css">
+
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="cart.html">🛒 Giỏ hàng</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="checkout-container">
+
+    <h1>Thanh toán đơn hàng</h1>
+
+    <div class="checkout-card">
+        
+        <div class="order-summary">
+
+            <h2>Thông tin đơn hàng</h2>
+
+            <div class="summary-item">
+                <span>Tổng sản phẩm</span>
+                <span id="totalItems">0</span>
+            </div>
+
+            <div class="summary-item">
+                <span>Tạm tính</span>
+                <span id="subtotal">0đ</span>
+            </div>
+
+            <div class="summary-item">
+                <span>Phí vận chuyển</span>
+                <span id="shippingFee">Miễn phí</span>
+            </div>
+
+            <div class="summary-item total">
+                <span>Tổng cộng</span>
+                <span id="totalPrice">0đ</span>
+            </div>
+
+        </div>
+
+        <div class="checkout-form">
+
+            <h2>Thông tin nhận hàng</h2>
+
+            <form id="checkoutForm">
+                
+                <div class="form-group">
+                    <label for="fullname">Họ và tên <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="fullname"
+                        name="fullname"
+                        placeholder="Nhập họ và tên"
+                        required
+                    >
+                    <span class="error-message" id="fullnameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại <span class="required">*</span></label>
+                    <input 
+                        type="tel" 
+                        id="phone"
+                        name="phone"
+                        placeholder="Nhập số điện thoại"
+                        pattern="[0-9]{10,11}"
+                        required
+                    >
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="email"
+                        name="email"
+                        placeholder="Nhập email"
+                        required
+                    >
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Địa chỉ nhận hàng <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="address"
+                        name="address"
+                        placeholder="Nhập địa chỉ"
+                        required
+                    >
+                    <span class="error-message" id="addressError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod">Phương thức thanh toán <span class="required">*</span></label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">-- Chọn phương thức thanh toán --</option>
+                        <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="BANK">Chuyển khoản ngân hàng</option>
+                        <option value="EWALLET">Ví điện tử</option>
+                    </select>
+                    <span class="error-message" id="paymentError"></span>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    Xác nhận đặt hàng
+                </button>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+    <p>🌐 Facebook: fb.com/gautrangtech</p>
+</footer>
+
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

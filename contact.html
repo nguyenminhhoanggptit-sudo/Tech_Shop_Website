@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Liên hệ - Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="cart.html">🛒 Giỏ hàng</a></li>
+        <li><a href="login.html">Đăng nhập / Đăng ký</a></li>
+        <li><a href="contact.html" class="active">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contact-container">
+    <h1>Liên hệ với chúng tôi</h1>
+    <div class="contact-info">
+      <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q Cầu Giấy, Hà Nội</p>
+      <p>📧 Email: contact@gautrangtech.vn</p>
+      <p>📞 Hotline: 0398 668 156</p>
+      <p>🌐 Facebook: fb.com/gautrangtech</p>
+    </div>
+
+    <div class="contact-form">
+      <h2>Gửi tin nhắn</h2>
+      <div id="message" class="form-message"></div>
+      <form id="contactForm">
+        <label for="fullname">Họ và tên</label>
+        <input id="fullname" type="text" name="fullname" placeholder="Nhập họ tên" required>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" placeholder="Nhập email" required>
+
+        <label for="content">Nội dung</label>
+        <textarea id="content" name="content" placeholder="Nhập nội dung..." rows="5" required></textarea>
+
+        <button type="submit" class="btn">Gửi</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+    <p>🌐 Facebook: fb.com/gautrangtech</p>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        fullname: document.getElementById('fullname').value,
+        email: document.getElementById('email').value,
+        content: document.getElementById('content').value
+      };
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const messageDiv = document.getElementById('message');
+        if (response.ok) {
+          messageDiv.textContent = '✅ Gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.';
+          messageDiv.className = 'form-message success';
+          document.getElementById('contactForm').reset();
+        } else {
+          messageDiv.textContent = '❌ Gửi thất bại. Vui lòng thử lại!';
+          messageDiv.className = 'form-message error';
+        }
+      } catch (error) {
+        document.getElementById('message').textContent = '❌ Lỗi: ' + error.message;
+        document.getElementById('message').className = 'form-message error';
+      }
+    });
+  </script>
+</body>
+</html>

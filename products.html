@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách sản phẩm - Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="products.html" class="active">Sản phẩm</a></li>
+        <li><a href="cart.html">🛒 Giỏ hàng</a></li>
+        <li><a href="login.html">Đăng nhập / Đăng ký</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="filter">
+    <input 
+      type="text" 
+      id="search-input"
+      placeholder="🔍 Tìm kiếm sản phẩm...">
+    <select id="category-filter">
+      <option value="">Tất cả danh mục</option>
+      <option value="phone">Điện thoại</option>
+      <option value="laptop">Laptop</option>
+      <option value="tv">Tivi</option>
+      <option value="loa">Loa</option>
+      <option value="mic">Mic</option>
+      <option value="camera">Camera</option>
+    </select>
+    <button class="btn" id="filter-btn">Lọc</button>
+  </section>
+
+  <section class="product-list">
+    <h1>Danh sách sản phẩm</h1>
+    
+    <!-- Loading state -->
+    <div id="loading" class="loading hidden">
+      <p>Đang tải sản phẩm...</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="error hidden">
+      <p id="error-message">Có lỗi khi tải sản phẩm</p>
+    </div>
+
+    <!-- Product grid -->
+    <div class="product-grid" id="product-grid">
+      <!-- Backend sẽ điền sản phẩm vào đây -->
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state hidden">
+      <p>Không tìm thấy sản phẩm nào</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 Email: contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+    <p>🌐 Facebook: fb.com/gautrangtech</p>
+  </footer>
+</body>
+</html>

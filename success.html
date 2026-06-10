@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt hàng thành công - Gấu Trắng Tech</title>
+    <link rel="stylesheet" href="css/success.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="cart.html">Giỏ hàng</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="success-container">
+    <div class="success-card">
+        <div class="success-icon">✔</div>
+        <h1>Đặt hàng thành công!</h1>
+
+        <p>Cảm ơn bạn đã mua sắm tại Gấu Trắng Tech.</p>
+        <p>Đơn hàng của bạn đã được ghi nhận và sẽ được xử lý trong thời gian sớm nhất.</p>
+
+        <div class="order-info">
+            <div class="order-code">
+                Mã đơn hàng: <strong></strong>
+            </div>
+
+            <div class="customer-info">
+                <h3>Thông tin khách hàng</h3>
+                <p><strong>Họ tên:</strong> <?php echo htmlspecialchars($order['customer_name']); ?></p>
+                <p><strong>Email:</strong> <?php echo htmlspecialchars($order['customer_email']); ?></p>
+                <p><strong>Điện thoại:</strong> <?php echo htmlspecialchars($order['customer_phone']); ?></p>
+                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($order['customer_address']); ?></p>
+            </div>
+
+            <div class="order-items">
+                <h3>Chi tiết đơn hàng</h3>
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($items as $item): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($item['product_name']); ?></td>
+                            <td><?php echo $item['quantity']; ?></td>
+                            <td><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
+                            <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="order-total">
+                <p><strong>Tổng tiền:</strong> <span><?php echo number_format($order['total_amount'], 0, ',', '.'); ?> VND</span></p>
+                <p><strong>Ngày đặt:</strong> <span><?php echo date('d/m/Y H:i', strtotime($order['created_at'])); ?></span></p>
+                <p><strong>Trạng thái:</strong> <span class="status-pending">Chờ xử lý</span></p>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-home">Tiếp tục mua sắm</a>
+    </div>
+</section>
+
+<footer>
+    <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+    <p>🌐 Facebook: fb.com/gautrangtech</p>
+</footer>
+
+</body>
+</html>

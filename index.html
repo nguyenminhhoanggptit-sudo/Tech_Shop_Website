@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">Gấu Trắng Tech</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="searchInput">
+        <button>🔍</button>
+      </div>
+      <div class="header-links">
+        <a href="products.html">Sản phẩm</a>
+        <a href="cart.html">🛒 Giỏ hàng</a>
+        <a href="login.html">Đăng nhập / Đăng ký</a>
+        <a href="contact.html">Liên hệ</a>
+      </div>
+    </div>
+  </header>
+  <section class="banner-news">
+    <div class="container">
+      <div class="news-grid" id="bannerContainer">
+        <!-- Backend sẽ render banners ở đây -->
+        <a href="products.html" class="news-card news-large">
+          <img src="images/banner1.jpg" alt="Banner 1">
+        </a>
+        <a href="products.html" class="news-card news-large">
+          <img src="images/banner2.jpg" alt="Banner 2">
+        </a>
+        <a href="products.html" class="news-card news-small">
+          <img src="images/banner3.jpg" alt="Banner 3">
+        </a>
+        <a href="products.html" class="news-card news-small">
+          <img src="images/banner4.jpg" alt="Banner 4">
+        </a>
+        <a href="products.html" class="news-card news-small">
+          <img src="images/banner.jpg" alt="Banner 5">
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="categories">
+    <div class="container">
+      <h2>Danh mục sản phẩm</h2>
+      <div class="category-grid" id="categoryContainer">
+        <!-- Backend sẽ render categories ở đây -->
+        <a href="products.html?category=phone" class="category-item" data-category-id="1">
+          <img src="images/phone.png" alt="Điện thoại">
+          <p>Điện thoại</p>
+        </a>
+        <a href="products.html?category=laptop" class="category-item" data-category-id="2">
+          <img src="images/laptop.png" alt="Laptop">
+          <p>Laptop</p>
+        </a>
+        <a href="products.html?category=tivi" class="category-item" data-category-id="3">
+          <img src="images/tivi.png" alt="Tivi">
+          <p>Tivi</p>
+        </a>
+        <a href="products.html?category=speaker" class="category-item" data-category-id="4">
+          <img src="images/loa.png" alt="Loa & Mic">
+          <p>Loa & Mic</p>
+        </a>
+        <a href="products.html?category=camera" class="category-item" data-category-id="5">
+          <img src="images/camera.png" alt="Camera">
+          <p>Camera</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="product-section">
+    <div class="container">
+      <h2>Sản phẩm nổi bật</h2>
+      <div class="product-grid" id="featuredProductsContainer">
+        <a href="product-detail.html?id=1" class="product-item" data-product-id="1">
+          <img src="images/featured1.jpg" alt="Sản phẩm nổi bật 1">
+          <h3 class="product-name">Sản phẩm nổi bật 1</h3>
+          <p class="product-price">Giá: <span>5.999.000đ</span></p>
+        </a>
+        <a href="product-detail.html?id=2" class="product-item" data-product-id="2">
+          <img src="images/featured2.jpg" alt="Sản phẩm nổi bật 2">
+          <h3 class="product-name">Sản phẩm nổi bật 2</h3>
+          <p class="product-price">Giá: <span>8.999.000đ</span></p>
+        </a>
+        <a href="product-detail.html?id=3" class="product-item" data-product-id="3">
+          <img src="images/featured3.jpg" alt="Sản phẩm nổi bật 3">
+          <h3 class="product-name">Sản phẩm nổi bật 3</h3>
+          <p class="product-price">Giá: <span>12.999.000đ</span></p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="product-section promo">
+    <div class="container">
+      <h2>Sản phẩm khuyến mãi</h2>
+      <div class="product-grid" id="promoProductsContainer">
+        <!-- Backend sẽ render promo products ở đây -->
+        <a href="product-detail.html?id=4" class="product-item" data-product-id="4">
+          <img src="images/promo1.jpg" alt="Sản phẩm khuyến mãi 1">
+          <h3 class="product-name">Sản phẩm khuyến mãi 1</h3>
+          <p class="product-price">Giá: <span>3.999.000đ</span></p>
+          <p class="product-discount">-20%</p>
+        </a>
+        <a href="product-detail.html?id=5" class="product-item" data-product-id="5">
+          <img src="images/promo2.jpg" alt="Sản phẩm khuyến mãi 2">
+          <h3 class="product-name">Sản phẩm khuyến mãi 2</h3>
+          <p class="product-price">Giá: <span>6.999.000đ</span></p>
+          <p class="product-discount">-15%</p>
+        </a>
+        <a href="product-detail.html?id=6" class="product-item" data-product-id="6">
+          <img src="images/promo3.jpg" alt="Sản phẩm khuyến mãi 3">
+          <h3 class="product-name">Sản phẩm khuyến mãi 3</h3>
+          <p class="product-price">Giá: <span>9.999.000đ</span></p>
+          <p class="product-discount">-25%</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 Email: contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+    <p>🌐 Facebook: fb.com/gautrangtech</p>
+  </footer>
+</body>
+</html>
