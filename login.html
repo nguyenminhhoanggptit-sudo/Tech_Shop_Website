@@ -26,7 +26,7 @@
       <!-- Đăng nhập -->
       <div class="form login-form">
         <h2>Đăng nhập</h2>
-        <form action="/login" method="POST">
+        <form id="loginForm">
           <label for="login-email">Email</label>
           <input id="login-email" type="email" name="email" placeholder="Nhập email" required>
 
@@ -39,7 +39,7 @@
       </div>
       <div class="form register-form hidden">
         <h2>Đăng ký</h2>
-        <form action="/register" method="POST">
+        <form id="registerForm">
           <label for="register-fullname">Họ và tên</label>
           <input id="register-fullname" type="text" name="fullname" placeholder="Nhập họ tên" required>
 
@@ -59,9 +59,8 @@
     <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
     <p>📧 Email: contact@gautrangtech.vn</p>
     <p>📞 Hotline: 0398 668 156</p>
-    <p>🌐 Facebook: fb.com/gautrangtech</p>
   </footer>
-  
+
+  <script src="js/login.js"></script>
 </body>
 </html>
-<!-- Add HTML and CSS -->
