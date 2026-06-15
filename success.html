@@ -34,10 +34,10 @@
 
             <div class="customer-info">
                 <h3>Thông tin khách hàng</h3>
-                <p><strong>Họ tên:</strong> <?php echo htmlspecialchars($order['customer_name']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($order['customer_email']); ?></p>
-                <p><strong>Điện thoại:</strong> <?php echo htmlspecialchars($order['customer_phone']); ?></p>
-                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($order['customer_address']); ?></p>
+                <p><strong>Họ tên:</strong> <span id="out-name"></span></p>
+                <p><strong>Email:</strong> <span id="out-email"></span></p>
+                <p><strong>Điện thoại:</strong> <span id="out-phone"></span></p>
+                <p><strong>Địa chỉ:</strong> <span id="out-address"></span></p>
             </div>
 
             <div class="order-items">
@@ -51,23 +51,13 @@
                             <th>Tổng</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php foreach ($items as $item): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($item['product_name']); ?></td>
-                            <td><?php echo $item['quantity']; ?></td>
-                            <td><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
-                            <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                    <tbody id="out-order-items-body">
+                        </tbody>
                 </table>
             </div>
 
             <div class="order-total">
-                <p><strong>Tổng tiền:</strong> <span><?php echo number_format($order['total_amount'], 0, ',', '.'); ?> VND</span></p>
-                <p><strong>Ngày đặt:</strong> <span><?php echo date('d/m/Y H:i', strtotime($order['created_at'])); ?></span></p>
-                <p><strong>Trạng thái:</strong> <span class="status-pending">Chờ xử lý</span></p>
+                <h3>Tổng cộng: <span id="out-total-price">0đ</span></h3>
             </div>
         </div>
 
@@ -78,10 +68,10 @@
 <footer>
     <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
     <p>📧 contact@gautrangtech.vn</p>
-    <p>📞 Hotline: 0398 668 156</p>
-    <p>🌐 Facebook: fb.com/gautrangtech</p>
+    <p>📞 0398 668 156</p>
 </footer>
+<script src="js/main.js"></script>
+<script src="js/success.js"></script>
 
 </body>
 </html>
-<!-- Add HTML and CSS -->
