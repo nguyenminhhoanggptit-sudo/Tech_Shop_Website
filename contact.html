@@ -51,42 +51,9 @@
   <footer>
     <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
     <p>📧 contact@gautrangtech.vn</p>
-    <p>📞 Hotline: 0398 668 156</p>
-    <p>🌐 Facebook: fb.com/gautrangtech</p>
+    <p>📞 0398 668 156</p>
   </footer>
-
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = {
-        fullname: document.getElementById('fullname').value,
-        email: document.getElementById('email').value,
-        content: document.getElementById('content').value
-      };
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-
-        const messageDiv = document.getElementById('message');
-        if (response.ok) {
-          messageDiv.textContent = '✅ Gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm.';
-          messageDiv.className = 'form-message success';
-          document.getElementById('contactForm').reset();
-        } else {
-          messageDiv.textContent = '❌ Gửi thất bại. Vui lòng thử lại!';
-          messageDiv.className = 'form-message error';
-        }
-      } catch (error) {
-        document.getElementById('message').textContent = '❌ Lỗi: ' + error.message;
-        document.getElementById('message').className = 'form-message error';
-      }
-    });
-  </script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
 </body>
 </html>
-<!-- Add HTML and CSS -->
