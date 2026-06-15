@@ -119,3 +119,65 @@ document.addEventListener('DOMContentLoaded', () => {
  
   renderCart();
 });
+
+
+function renderProcessingOrders() {
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  const container = document.getElementById('processing-orders-container');
+  
+  if (!container) return; // Nếu không ở trang giỏ hàng thì dừng lại
+
+  // Nếu chưa từng mua đơn nào
+  if (orders.length === 0) {
+    container.innerHTML = `<p style="color: #6b7280; font-style: italic; padding: 20px 0;">Bạn không có đơn hàng nào đang xử lý.</p>`;
+    return;
+  }
+
+  let html = '';
+  
+  // Duyệt qua từng đơn hàng đã mua để tạo giao diện hiển thị
+  orders.forEach(order => {
+    const dateObj = new Date(order.date);
+    const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}/${(dateObj.getMonth() + 1).toString().padStart(2, '0')}/${dateObj.getFullYear()} ${dateObj.getHours().toString().padStart(2, '0')}:${dateObj.getMinutes().toString().padStart(2, '0')}`;
+
+    html += `
+      <div style="background: #ffffff; border: 1px solid #e5e7eb; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <!-- Thanh tiêu đề đơn hàng -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; margin-bottom: 10px;">
+          <div>
+            <span style="font-size: 16px;"><strong>Mã đơn:</strong> <span style="color: #2563eb; font-weight: 700;">${order.orderCode}</span></span>
+            <br>
+            <span style="font-size: 13px; color: #9ca3af;">Ngày đặt: ${formattedDate}</span>
+          </div>
+          <span style="background: #fef3c7; color: #d97706; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">⏳ Đang xử lý</span>
+        </div>
+        
+        <!-- Danh sách sản phẩm mua trong đơn này -->
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 10px;">
+          ${order.items.map(item => `
+            <tr style="border-bottom: 1px dashed #f3f4f6;">
+              <td style="padding: 8px 0; color: #374151;">${item.name}</td>
+              <td style="padding: 8px 0; text-align: center; color: #6b7280; width: 60px;">x${item.quantity}</td>
+              <td style="padding: 8px 0; text-align: right; font-weight: 500; color: #111827; width: 120px;">${formatPrice(item.price * item.quantity)}</td>
+            </tr>
+          `).join('')}
+        </table>
+        
+        <!-- Tổng tiền đơn hàng -->
+        <div style="text-align: right; font-size: 15px;">
+          <span style="color: #4b5563;">Tổng thanh toán:</span>
+          <span style="color: #ef4444; font-weight: 700; font-size: 17px; margin-left: 5px;">${formatPrice(order.totalAmount)}</span>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// Tìm đoạn mã xử lý sự kiện DOMContentLoaded có sẵn ở ĐẦU FILE cart.js 
+// và gọi thêm hàm renderProcessingOrders() vào đó.
+// Hoặc để chắc chắn, bạn có thể bổ sung thêm đoạn bắt sự kiện này:
+document.addEventListener('DOMContentLoaded', () => {
+  renderProcessingOrders();
+});
