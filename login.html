@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập / Đăng ký - Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="cart.html">🛒 Giỏ hàng</a></li>
+        <li><a href="login.html" class="active">Đăng nhập / Đăng ký</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="auth-container">
+    <div class="form-box">
+      <!-- Đăng nhập -->
+      <div class="form login-form">
+        <h2>Đăng nhập</h2>
+        <form id="loginForm">
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" name="email" placeholder="Nhập email" required>
+
+          <label for="login-password">Mật khẩu</label>
+          <input id="login-password" type="password" name="password" placeholder="Nhập mật khẩu" required>
+
+          <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+        <p>Chưa có tài khoản? <a href="#" id="show-register">Đăng ký ngay</a></p>
+      </div>
+      <div class="form register-form hidden">
+        <h2>Đăng ký</h2>
+        <form id="registerForm">
+          <label for="register-fullname">Họ và tên</label>
+          <input id="register-fullname" type="text" name="fullname" placeholder="Nhập họ tên" required>
+
+          <label for="register-email">Email</label>
+          <input id="register-email" type="email" name="email" placeholder="Nhập email" required>
+
+          <label for="register-password">Mật khẩu</label>
+          <input id="register-password" type="password" name="password" placeholder="Tạo mật khẩu" required>
+
+          <button type="submit" class="btn">Đăng ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a></p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 Email: contact@gautrangtech.vn</p>
+    <p>📞 Hotline: 0398 668 156</p>
+  </footer>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng - Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">Gấu Trắng Tech</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm...">
+        <button>🔍</button>
+      </div>
+      <div class="header-links">
+        <a href="products.html">Sản phẩm</a>
+        <a href="cart.html" class="active">🛒 Giỏ hàng</a>
+        <a href="login.html">Đăng nhập / Đăng ký</a>
+        <a href="contact.html">Liên hệ</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="cart-container">
+    <h1>🛒 Giỏ hàng của bạn</h1>
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody id="cart-body">
+      </tbody>
+    </table>
+    <div class="cart-summary">
+      <h3>Tổng cộng: <span id="cart-total">0 VND</span></h3>
+
+      <a href="checkout.html" class="btn-checkout">
+          Thanh toán
+      </a>
+    </div>
+  </section>
+  <section class="cart-container" style="margin-top: 40px; border-top: 2px dashed #ccc; padding-top: 20px;">
+    <h2>📦 Đơn hàng đang xử lý của bạn</h2>
+    <div id="processing-orders-container">
+      <!-- JavaScript sẽ tự động điền các đơn hàng đã mua vào đây -->
+    </div>
+  </section>
+  <footer>
+    <p>📍 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 contact@gautrangtech.vn</p>
+    <p>📞 0398 668 156</p>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+
+</body>
+</html>

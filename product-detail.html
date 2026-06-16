@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết sản phẩm - Gấu Trắng Tech</title>
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+  
+  <header>
+    <div class="logo">
+      <a href="index.html">Gấu Trắng Tech</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="cart.html">🛒 Giỏ hàng</a></li>
+        <li><a href="login.html">Đăng nhập / Đăng ký</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="breadcrumb">
+    <a href="index.html">Trang chủ</a>
+    <span>/</span>
+    <a href="products.html">Sản phẩm</a>
+    <span>/</span>
+    <span id="breadcrumb-product">Chi tiết</span>
+  </section>
+
+  <div id="loading" class="loading hidden">
+    <p>Đang tải sản phẩm...</p>
+  </div>
+
+  <div id="error" class="error hidden">
+    <p id="error-message">Có lỗi khi tải sản phẩm</p>
+  </div>
+
+  <section class="product-detail" id="product-detail">
+    <div class="product-image">
+      <img id="product-image" src="images/placeholder.jpg" alt="Tên sản phẩm">
+    </div>
+    <div class="product-info">
+      <h1 id="product-name">Tên sản phẩm</h1>
+      <div class="rating">
+        <span id="product-rating">⭐ 4.5</span>
+        <span id="review-count">(120 đánh giá)</span>
+      </div>
+      <p class="price" id="product-price">Giá sản phẩm</p>
+      <p class="stock" id="product-stock">Tồn kho: <span id="stock-amount">10</span></p>
+      <p class="description" id="product-description">Mô tả sản phẩm</p>
+      
+      <div class="product-actions">
+        <input type="number" id="quantity" value="1" min="1" class="quantity-input">
+        <button id="add-to-cart" class="btn-add-cart" data-id="">Thêm vào giỏ hàng</button>
+      </div>
+
+      <div class="product-specs">
+        <h3>Thông số kỹ thuật</h3>
+        <ul id="specs-list">
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>📍 Địa chỉ: 122 Hoàng Quốc Việt, Q.Cầu Giấy, Hà Nội</p>
+    <p>📧 Email: contact@gautrangtech.vn</p>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/product-detail.js"></script>
+</body>
+</html>
