@@ -31,31 +31,42 @@
 
     <div class="checkout-card">
         
-        <div class="order-summary">
+    <div class="order-summary">
+        <h2>Thông tin đơn hàng</h2>
 
-            <h2>Thông tin đơn hàng</h2>
-
-            <div class="summary-item">
-                <span>Tổng sản phẩm</span>
-                <span id="totalItems">0</span>
-            </div>
-
-            <div class="summary-item">
-                <span>Tạm tính</span>
-                <span id="subtotal">0đ</span>
-            </div>
-
-            <div class="summary-item">
-                <span>Phí vận chuyển</span>
-                <span id="shippingFee">Miễn phí</span>
-            </div>
-
-            <div class="summary-item total">
-                <span>Tổng cộng</span>
-                <span id="totalPrice">0đ</span>
-            </div>
-
+        <div class="summary-item">
+            <span>Tổng sản phẩm</span>
+            <span id="totalItems">0</span>
         </div>
+
+        <div class="summary-item">
+            <span>Tạm tính</span>
+            <span id="subtotal">0đ</span>
+        </div>
+
+        <!-- Ô nhập mã coupon giảm giá -->
+        <div class="summary-item discount-box" style="display: flex; gap: 8px; margin: 15px 0; padding: 10px 0; border-top: 1px dashed #e5e7eb; border-bottom: 1px dashed #e5e7eb;">
+            <input type="text" id="couponCode" placeholder="Nhập mã giảm giá" style="flex: 1; padding: 8px; border: 1px solid #d1d5db; border-radius: 4px; text-transform: uppercase;">
+            <button type="button" id="applyCouponBtn" style="padding: 8px 15px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Áp dụng</button>
+        </div>
+        <p id="couponMessage" style="font-size: 13px; margin-top: -10px; margin-bottom: 10px; display: none;"></p>
+
+        <!-- Dòng hiển thị số tiền giảm giá -->
+        <div class="summary-item" id="discountRow" style="color: #10b981; display: none;">
+            <span>Giảm giá (<span id="discountPercent">0%</span>)</span>
+            <span id="discountAmount">-0đ</span>
+        </div>
+
+        <div class="summary-item">
+            <span>Phí vận chuyển</span>
+            <span id="shippingFee">Miễn phí</span>
+        </div>
+
+        <div class="summary-item total">
+            <span>Tổng cộng</span>
+            <span id="totalPrice">0đ</span>
+        </div>
+    </div>
 
         <div class="checkout-form">
 
