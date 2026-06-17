@@ -117,8 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
  
+  // Gọi kích hoạt đồng thời cả 2 khu vực hiển thị dữ liệu
   renderCart();
+  renderProcessingOrders();
 });
+
+// ── Hàm hiển thị danh sách lịch sử đơn hàng ──
 
 
 function renderProcessingOrders() {
@@ -127,7 +131,6 @@ function renderProcessingOrders() {
   
   if (!container) return; // Nếu không ở trang giỏ hàng thì dừng lại
 
-  // Nếu chưa từng mua đơn nào
   if (orders.length === 0) {
     container.innerHTML = `<p style="color: #6b7280; font-style: italic; padding: 20px 0;">Bạn không có đơn hàng nào đang xử lý.</p>`;
     return;
@@ -135,25 +138,92 @@ function renderProcessingOrders() {
 
   let html = '';
   
-  // Duyệt qua từng đơn hàng đã mua để tạo giao diện hiển thị
-  orders.forEach(order => {
+  orders.forEach((order, index) => {
     const dateObj = new Date(order.date);
     const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}/${(dateObj.getMonth() + 1).toString().padStart(2, '0')}/${dateObj.getFullYear()} ${dateObj.getHours().toString().padStart(2, '0')}:${dateObj.getMinutes().toString().padStart(2, '0')}`;
 
+    // Kiểm tra xem đơn hàng đã quá 10 giây chưa (10000 mili giây)
+    const timePassed = Date.now() - dateObj.getTime();
+    const isCancellable = timePassed < 10000; 
+
+    // Tính toán số giây còn lại để hủy đơn
+    const timeLeft = Math.max(0, Math.ceil((10000 - timePassed) / 1000));
+
+    // Hiển thị nhãn mã giảm giá nếu có
+    const couponTag = order.couponCode ? `<span style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-weight: 500;">Mã: ${order.couponCode}</span>` : '';
+
+    // Thiết kế phần hiển thị giảm giá và giá gốc
+    let discountRowHtml = '';
+    if (order.discountAmount && order.discountAmount > 0) {
+      discountRowHtml = `
+        <div style="display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; margin-bottom: 4px;">
+          <span>Tạm tính:</span>
+          <span>${formatPrice(order.subtotalAmount || order.totalAmount)}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; color: #10b981; margin-bottom: 4px;">
+          <span>Số tiền được giảm (${order.couponCode}):</span>
+          <span>-${formatPrice(order.discountAmount)}</span>
+        </div>
+      `;
+    }
+
+    // Thiết kế Trạng thái & Nút Hủy dựa theo thời gian 10 giây
+    let statusHtml = '';
+    let cancelActionHtml = '';
+
+    if (isCancellable) {
+      statusHtml = `<span id="status-text-${index}" style="background: #fef3c7; color: #d97706; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">⏳ Đang xử lý (${timeLeft}s)</span>`;
+      cancelActionHtml = `
+        <button onclick="cancelOrder('${order.orderCode}')" id="cancel-btn-${index}" 
+          style="background: #ef4444; color: #ffffff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s;">
+          ❌ Hủy đơn hàng
+        </button>
+      `;
+
+      // Thiết lập bộ đếm ngược tự động chuyển trạng thái sau số giây còn lại
+      setTimeout(() => {
+        const statusTextNode = document.getElementById(`status-text-${index}`);
+        const cancelBtnNode = document.getElementById(`cancel-btn-${index}`);
+        
+        if (statusTextNode) {
+          statusTextNode.style.background = '#d1fae5';
+          statusTextNode.style.color = '#065f46';
+          statusTextNode.innerHTML = '✅ Đặt hàng thành công';
+        }
+        if (cancelBtnNode) {
+          cancelBtnNode.remove(); // Xóa mất nút hủy đơn hàng
+        }
+      }, 10000 - timePassed);
+
+      // Cập nhật số giây đếm ngược hiển thị trên nhãn mỗi giây một lần
+      const countdownInterval = setInterval(() => {
+        const currentPassed = Date.now() - dateObj.getTime();
+        const currentLeft = Math.max(0, Math.ceil((10000 - currentPassed) / 1000));
+        const currentStatusNode = document.getElementById(`status-text-${index}`);
+        
+        if (currentStatusNode && currentPassed < 10000) {
+          currentStatusNode.innerHTML = `⏳ Đang xử lý (${currentLeft}s)`;
+        } else {
+          clearInterval(countdownInterval);
+        }
+      }, 1000);
+
+    } else {
+      statusHtml = `<span style="background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">✅ Đặt hàng thành công</span>`;
+    }
+
     html += `
       <div style="background: #ffffff; border: 1px solid #e5e7eb; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-        <!-- Thanh tiêu đề đơn hàng -->
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; margin-bottom: 10px;">
           <div>
-            <span style="font-size: 16px;"><strong>Mã đơn:</strong> <span style="color: #2563eb; font-weight: 700;">${order.orderCode}</span></span>
+            <span style="font-size: 16px;"><strong>Mã đơn:</strong> <span style="color: #2563eb; font-weight: 700;">${order.orderCode}</span> ${couponTag}</span>
             <br>
             <span style="font-size: 13px; color: #9ca3af;">Ngày đặt: ${formattedDate}</span>
           </div>
-          <span style="background: #fef3c7; color: #d97706; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">⏳ Đang xử lý</span>
+          ${statusHtml}
         </div>
         
-        <!-- Danh sách sản phẩm mua trong đơn này -->
-        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 10px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 12px;">
           ${order.items.map(item => `
             <tr style="border-bottom: 1px dashed #f3f4f6;">
               <td style="padding: 8px 0; color: #374151;">${item.name}</td>
@@ -163,10 +233,16 @@ function renderProcessingOrders() {
           `).join('')}
         </table>
         
-        <!-- Tổng tiền đơn hàng -->
-        <div style="text-align: right; font-size: 15px;">
-          <span style="color: #4b5563;">Tổng thanh toán:</span>
-          <span style="color: #ef4444; font-weight: 700; font-size: 17px; margin-left: 5px;">${formatPrice(order.totalAmount)}</span>
+        ${discountRowHtml}
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f3f4f6;">
+          <div>
+            ${cancelActionHtml}
+          </div>
+          <div style="text-align: right; font-size: 15px;">
+            <span style="color: #4b5563;">Tổng thanh toán:</span>
+            <span style="color: #ef4444; font-weight: 700; font-size: 18px; margin-left: 5px;">${formatPrice(order.totalAmount)}</span>
+          </div>
         </div>
       </div>
     `;
@@ -175,9 +251,15 @@ function renderProcessingOrders() {
   container.innerHTML = html;
 }
 
-// Tìm đoạn mã xử lý sự kiện DOMContentLoaded có sẵn ở ĐẦU FILE cart.js 
-// và gọi thêm hàm renderProcessingOrders() vào đó.
-// Hoặc để chắc chắn, bạn có thể bổ sung thêm đoạn bắt sự kiện này:
-document.addEventListener('DOMContentLoaded', () => {
-  renderProcessingOrders();
-});
+// Hàm bổ sung xử lý khi người dùng ấn vào nút "Hủy đơn hàng"
+function cancelOrder(orderCode) {
+  if (confirm(`Bạn có chắc chắn muốn hủy đơn hàng ${orderCode} không?`)) {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    // Lọc bỏ đơn hàng có mã trùng khớp ra khỏi mảng lưu trữ
+    orders = orders.filter(order => order.orderCode !== orderCode);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    
+    alert('Đã hủy đơn hàng thành công!');
+    renderProcessingOrders(); // Tải lại danh sách đơn hàng ngay lập tức
+  }
+}
