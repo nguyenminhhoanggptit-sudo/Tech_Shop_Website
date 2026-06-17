@@ -1,3 +1,5 @@
+// characters/checkout.js
+
 const cart = getCart();
 
 let totalItems = 0;
@@ -36,14 +38,24 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
         date: new Date().toISOString()
     };
 
-    // LƯU VÀO LOCALSTORAGE TRƯỚC KHI CHUYỂN TRANG
+    // ── XỬ LÝ LƯU DANH SÁCH ĐƠN HÀNG ĐỂ HIỂN THỊ LẠI ──
+    // 1. Lấy danh sách đơn hàng cũ đã có trong máy (nếu chưa có thì tạo mảng rỗng)
+    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    
+    // 2. Đẩy đơn hàng mới vừa mua lên đầu danh sách
+    existingOrders.unshift(finalOrder);
+    
+    // 3. Lưu mảng mới này đè lại vào localStorage với key là 'orders'
+    localStorage.setItem('orders', JSON.stringify(existingOrders));
+
+    // LƯU VÀO LOCALSTORAGE TRƯỚC KHI CHUYỂN TRANG (Phục vụ riêng trang thành công)
     localStorage.setItem('receiptOrder', JSON.stringify(finalOrder));
 
     alert("Đặt hàng thành công!");
 
-    // Làm sạch giỏ hàng
+    // Làm sạch giỏ hàng tạm thời để sẵn sàng cho lần mua sau
     localStorage.removeItem("cart");
 
-    // CHUYỂN HƯỚNG SANG TRANG SUCCESS Chứ không về index
+    // CHUYỂN HƯỚNG SANG TRANG SUCCESS
     window.location.href = "success.html";
 });
