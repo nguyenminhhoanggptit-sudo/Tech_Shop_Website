@@ -31,3 +31,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ===== Slider Banner =====
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let currentSlide = 0;
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+if (slides.length > 0) {
+
+    // Tự động chuyển ảnh
+    setInterval(nextSlide, 5000);
+
+    // Nút Next
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    // Nút Prev
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+    }
+}
