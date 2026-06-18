@@ -1,3 +1,5 @@
+// characters/success.js
+
 document.addEventListener('DOMContentLoaded', () => {
     // Đọc thông tin đơn hàng vừa được ghi nhận từ trang thanh toán
     const order = JSON.parse(localStorage.getItem('receiptOrder'));
@@ -38,15 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = rowsHtml;
     }
 
-    // 3. Đổ tổng tiền thanh toán và định dạng thời gian đặt hàng
+    // 3. Đổ chi tiết tiền gốc, giảm giá và tổng tiền thanh toán cuối cùng
     const orderTotalDiv = document.querySelector('.order-total');
     if (orderTotalDiv) {
         const dateObj = new Date(order.date);
         const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}/${(dateObj.getMonth() + 1).toString().padStart(2, '0')}/${dateObj.getFullYear()} ${dateObj.getHours().toString().padStart(2, '0')}:${dateObj.getMinutes().toString().padStart(2, '0')}`;
         
+        // Chuẩn bị dòng hiển thị thông tin giảm giá nếu có sử dụng mã
+        let discountHtml = '';
+        if (order.discountAmount && order.discountAmount > 0) {
+            discountHtml = `<p><strong>Giảm giá (${order.couponCode}):</strong> <span style="color:#10b981; font-weight:500;">-${order.discountAmount.toLocaleString('vi-VN')} VND</span></p>`;
+        }
+
         orderTotalDiv.innerHTML = `
-            <p><strong>Tổng tiền:</strong> <span style="color:#dc3545; font-weight:bold; font-size:1.25rem;">${order.totalAmount.toLocaleString('vi-VN')} VND</span></p>
-            <p><strong>Ngày đặt:</strong> <span>${formattedDate}</span></p>
+            <p><strong>Tạm tính:</strong> <span>${(order.subtotalAmount || order.totalAmount).toLocaleString('vi-VN')} VND</span></p>
+            ${discountHtml}
+            <p><strong>Tổng thanh toán:</strong> <span style="color:#dc3545; font-weight:bold; font-size:1.25rem;">${order.totalAmount.toLocaleString('vi-VN')} VND</span></p>
+            <p style="margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 10px;"><strong>Ngày đặt:</strong> <span>${formattedDate}</span></p>
             <p><strong>Trạng thái:</strong> <span class="status-pending" style="background:#ffc107; color:#212529; padding:2px 8px; border-radius:4px; font-size:0.85rem; font-weight:bold;">Chờ xử lý</span></p>
         `;
     }
