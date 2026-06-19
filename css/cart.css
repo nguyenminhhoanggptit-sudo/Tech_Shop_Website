@@ -24,6 +24,10 @@ header {
     position: sticky;
     top: 0;
     z-index: 999;
+
+    display: flex;              /* 🔥 quan trọng nhất */
+    justify-content: space-between; /* đẩy logo trái - menu phải */
+    align-items: center;        /* căn giữa theo chiều dọc */
 }
 
 .header-container {
@@ -34,17 +38,28 @@ header {
 }
 
 .logo a{
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: 700;
-    color: #1e3a8a;
-    letter-spacing: .5px;
-    white-space: nowrap;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    font-size:30px;
+    font-weight:700;
+    color:#1e3a8a;
+    letter-spacing:.5px;
+    white-space:nowrap;
 }
 
 .logo a:hover{
-    color: #05080f;
+    color:#2563eb;
 }
+
+.logo img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 .search-box {
     flex: 1;
     display: flex;
@@ -84,35 +99,22 @@ header {
     background: #1d4ed8;
 }
 
-.header-links {
-    display: flex;
-    list-style: none;
-    gap: 25px;
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
 }
 
-.header-links a {
-    text-decoration: none;
-    color: #374151;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    position: relative;
+nav ul li a{
+    text-decoration:none;
+    color:#374151;
+    font-weight:600;
+    transition:.3s;
 }
 
-.header-links a:hover,
-.header-links a.active {
-    color: #2563eb;
-}
-
-.header-links a:hover::after,
-.header-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #2563eb;
-    transition: width 0.3s ease;
+nav ul li a:hover,
+nav ul li a.active{
+    color:#2563eb;
 }
 
 @keyframes slideIn {
