@@ -100,30 +100,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── Lấy sản phẩm ──────────────────────────
 
   async function fetchProducts() {
-    showState("loading");
-    try {
-      // Giả lập độ trễ API
-      await new Promise((r) => setTimeout(r, 400));
-      allProducts = PRODUCTS;
+  showState("loading");
+  try {
+    await new Promise((r) => setTimeout(r, 400));
+    allProducts = PRODUCTS;
 
-      // Đọc query params từ URL
-      const params = new URLSearchParams(window.location.search);
-      const catParam = params.get("category");
-      if (catParam && categoryEl) {
-        categoryEl.value = catParam;
-      }
-      if (searchEl) {
-        const q = params.get("q");
-        if (q) searchEl.value = q;
-      }
+    const params = new URLSearchParams(window.location.search);
+    const catParam = params.get("category");
 
-      renderProducts(filterProducts());
-    } catch (err) {
-      showState("error");
-      const errMsg = document.getElementById("error-message");
-      if (errMsg) errMsg.textContent = "Không thể tải sản phẩm: " + err.message;
+    if (catParam && categoryEl) {
+      categoryEl.value = catParam;
     }
+    if (searchEl) {
+      const q = params.get("q");
+      if (q) searchEl.value = q;
+    }
+
+    // Nếu category=loa thì lọc cả loa + mic
+    if (catParam === "loa") {
+      const filtered = PRODUCTS.filter(
+        (p) => p.category === "loa" || p.category === "mic"
+      );
+      renderProducts(filtered);
+    } else {
+      renderProducts(filterProducts());
+    }
+  } catch (err) {
+    showState("error");
+    const errMsg = document.getElementById("error-message");
+    if (errMsg) errMsg.textContent = "Không thể tải sản phẩm: " + err.message;
   }
+}
 
   // ── Filter ────────────────────────────────
 
